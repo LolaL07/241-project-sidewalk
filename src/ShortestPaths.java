@@ -26,10 +26,22 @@ public class ShortestPaths {
      * back pointer to the previous node on the shortest path.
      * Precondition: origin is a node in the Graph.*/
     public void compute(Node origin) {
-        paths = new HashMap<Node,PathData>();
-
         // TODO 1: implement Dijkstra's algorithm to fill paths with
         // shortest-path data for each Node reachable from origin.
+
+        paths = new HashMap<Node,PathData>();
+        LinkedList<Node> visisted = new LinkedList<Node>();
+
+        for ()
+
+        //something to keep track of distances. PathData in the paths hashmap 
+        // make list of visited/unvisited nodes
+        // loop through all nodes and set initial path data in paths
+        //start with node of lowest distance (from origin), origin
+        //look at neighbors, for each neighbor, calculate distance (current distance +  neighbors weight?)
+        // HOW to get weigh/distance from node?
+        //if new distance is smaller than current recorded, update it with new distance
+        // is this recursive? is there a second method that is called that is?
 
     }
 
