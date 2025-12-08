@@ -26,11 +26,20 @@ public class ShortestPaths {
      * back pointer to the previous node on the shortest path.
      * Precondition: origin is a node in the Graph.*/
     public void compute(Node origin) {
-        paths = new HashMap<Node,PathData>();
-
+        
         // TODO 1: implement Dijkstra's algorithm to fill paths with
         // shortest-path data for each Node reachable from origin.
 
+        paths = new HashMap<Node,PathData>();
+        PriorityQueue<Node> u = new PriorityQueue<>();
+        LinkedList<Node> processed = new LinkedList<Node>();
+        //assign distances
+        Node current = origin;
+        u.add(current);
+
+        while(!u.isEmpty()) {
+
+        }
     }
 
     /** Returns the length of the shortest path from the origin to destination.
