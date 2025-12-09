@@ -63,7 +63,9 @@ public class ShortestPaths {
     public double shortestPathLength(Node destination) {
         // TODO 2 - implement this method to fetch the shortest path length
         // from the paths data computed by Dijkstra's algorithm.
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+
+        return paths.get(destination).distance;        
     }
 
     /** Returns a LinkedList of the nodes along the shortest path from origin
@@ -76,7 +78,17 @@ public class ShortestPaths {
         // TODO 3 - implement this method to reconstruct sequence of Nodes
         // along the shortest path from the origin to destination using the
         // paths data computed by Dijkstra's algorithm.
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+
+        LinkedList<Node> dp = new LinkedList<Node>();
+        dp.add(destination);
+        // dp.addFirst(shortestPath(paths.get(destination).previous));
+        Node temp = destination;
+        while(paths.get(temp).distance >= 0) {
+            dp.add(temp);
+            temp = paths.get(temp).previous;
+        }
+        return dp;
     }
 
 
