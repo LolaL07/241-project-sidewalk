@@ -31,9 +31,23 @@ public class ShortestPaths {
         // shortest-path data for each Node reachable from origin.
 
         paths = new HashMap<Node,PathData>();
-        PriorityQueue<Node> u = new PriorityQueue<>();
+
+        // PriorityQueue<Node> u = new PriorityQueue<>();
+        PriorityQueue<Map.Entry<Node, Double>> u = new PriorityQueue<>(Map.Entry.comparingByValue());
+        // PriorityQueue<Node> u = new PriorityQueue<>(Map.Entry.comparingByValue());
+
         LinkedList<Node> processed = new LinkedList<Node>();
-        //assign distances
+
+        //assign distances: 0 for origin, rest = infinity
+        HashMap<Node, Double> distances = new HashMap<>();
+        for(Map.Entry<String, Node> entry : g.getNodes().entrySet()) {
+            if(entry.getValue().equals(origin)) {
+                distances.put(entry.getValue(), 0.0);
+            } else {
+                distances.put(entry.getValue(), Double.POSITIVE_INFINITY);
+            }
+        }
+
         Node current = origin;
         u.add(current);
 
