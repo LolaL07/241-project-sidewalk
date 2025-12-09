@@ -5,13 +5,14 @@ import java.util.HashMap;
  * map that associates each neighboring node with the weight of the edge to
  * that node. It is the responsibility of the user of this class to avoid
  * making multiple Nodes with the same unique identifier. */
-public class Node {
+public class Node implements Comparable<Node> {
 
     private final String id; // unique identifier for this node
+    Double dist = 0.0;
 
     // for each node v that has an edge from this to v, neighbors maps
     //  v -> the weight of the edge
-     private HashMap<Node,Double> neighbors;
+    private HashMap<Node,Double> neighbors;
 
     /** Constructor: create node with the given id */
     public Node(String id) {
@@ -36,6 +37,10 @@ public class Node {
         neighbors.put(neighbor, weight);
     }
 
+    public void setDist(Double d) {
+      dist = d;
+    }
+
     /** returns the Node's unique identifier */
     @Override
     public String toString() {
@@ -56,4 +61,14 @@ public class Node {
     public int hashCode() {
       return id.hashCode();
     }
+
+    @Override
+    public int compareTo(Node n) {
+      return this.dist.compareTo(n.dist);
+    }
 }
+
+// public class NodeComparator implements Comparator<Node> {
+ 
+
+// }
