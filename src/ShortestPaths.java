@@ -81,16 +81,26 @@ public class ShortestPaths {
         // throw new UnsupportedOperationException();
 
         LinkedList<Node> dp = new LinkedList<Node>();
-        dp.add(destination);
-        // dp.addFirst(shortestPath(paths.get(destination).previous));
         Node temp = destination;
-        while(paths.get(temp).distance >= 0) {
-            dp.add(temp);
+        while(paths.get(temp).distance > 0) {
+            dp.addFirst(temp);
             temp = paths.get(temp).previous;
         }
+        dp.addFirst(temp);
+
         return dp;
     }
 
+    //prints each node in paths and its associated pathdata
+    public void print() {
+        if(paths.isEmpty()) {
+            System.out.println("paths is empty");
+        } else {
+            for(Map.Entry<Node, PathData> entry : paths.entrySet()) {
+                System.out.println("Node: " + entry.getKey().getId() + " Path Distance and Previous node: " + entry.getValue().distance + " " + entry.getValue().previous);
+            }
+        }
+    }
 
     /** Inner class representing data used by Dijkstra's algorithm in the
      * process of computing shortest paths from a given source node. */
