@@ -32,27 +32,49 @@ public class ShortestPaths {
 
         paths = new HashMap<Node,PathData>();
 
-        // PriorityQueue<Node> u = new PriorityQueue<>();
-        PriorityQueue<Map.Entry<Node, Double>> u = new PriorityQueue<>(Map.Entry.comparingByValue());
+        PriorityQueue<Node> u = new PriorityQueue<>();
+        // PriorityQueue<Map.Entry<Node, Double>> u = new PriorityQueue<>(Map.Entry.comparingByValue());
         // PriorityQueue<Node> u = new PriorityQueue<>(Map.Entry.comparingByValue());
 
         LinkedList<Node> processed = new LinkedList<Node>();
 
         //assign distances: 0 for origin, rest = infinity
-        HashMap<Node, Double> distances = new HashMap<>();
+        // HashMap<Node, Double> distances = new HashMap<>();
         for(Map.Entry<String, Node> entry : g.getNodes().entrySet()) {
             if(entry.getValue().equals(origin)) {
-                distances.put(entry.getValue(), 0.0);
+                // distances.put(entry.getValue(), 0.0);
+                entry.getValue().setDist(0.0);
             } else {
-                distances.put(entry.getValue(), Double.POSITIVE_INFINITY);
+                // distances.put(entry.getValue(), Double.POSITIVE_INFINITY);
+                entry.getValue().setDist(Double.POSITIVE_INFINITY);
             }
         }
 
         Node current = origin;
         u.add(current);
+        // u.add(distances.get(origin)); //add map entry with same key from distances
 
         while(!u.isEmpty()) {
+            current = u.poll();
+            for(Node neighbor : current.getNeighbors().keySet()) {
 
+                Double edgeWeight = current.getNeighbors().get(neighbor);
+                if(!processed.contains(neighbor)) {
+                    Double newDist = current.dist + edgeWeight;
+                    if(newDist < neighbor.dist) {
+                        PathData temp = new PathData(newDist, current);
+                        paths.put(neighbor, temp);
+                    }
+                    neighbor.setDist(Math.min(neighbor.dist, newDist));
+                    u.add(neighbor);
+                }
+            }
+            
+            if(current.equals(origin)) {
+                PathData temp2 = new PathData(0.0, current);
+                paths.put(current, temp2);
+            }
+            processed.add(current);
         }
     }
 
