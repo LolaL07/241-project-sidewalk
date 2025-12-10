@@ -194,5 +194,14 @@ public class ShortestPaths {
       // If destCode was given, print the nodes in the path from
       // origCode to destCode, followed by the total path length
       // If no path exists, print a message saying so.
+
+        ShortestPaths sp = new ShortestPaths();
+
+        if(SidewalkDestCode == null) {
+        //print each node in paths and its distance
+
+        } else if(SidewalkDestCode != null) {
+
+        }
     }
 }
