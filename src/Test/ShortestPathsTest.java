@@ -42,13 +42,58 @@ public class ShortestPathsTest {
         g.report();
         ShortestPaths sp = new ShortestPaths();
         Node a = g.getNode("A");
-        sp.compute(a);
+        sp.compute(g, a);
         Node b = g.getNode("B");
         LinkedList<Node> abPath = sp.shortestPath(b);
         assertEquals(abPath.size(), 2);
         assertEquals(abPath.getFirst(), a);
         assertEquals(abPath.getLast(),  b);
         assertEquals(sp.shortestPathLength(b), 1.0, 1e-6);
+    }
+
+    @Test
+    public void test02Complex() {
+      //multi-edge path
+      Graph g = loadBasicGraph("data/Simple1.txt");
+        g.report();
+        ShortestPaths sp = new ShortestPaths();
+        Node a = g.getNode("A");
+        sp.compute(g, a);
+        Node d = g.getNode("D");
+        LinkedList<Node> adPath = sp.shortestPath(d);
+        assertEquals(adPath.size(), 3);
+        assertEquals(adPath.getFirst(), a);
+        assertEquals(adPath.getLast(),  d);
+        assertEquals(sp.shortestPathLength(d), 4.0);
+
+    }
+
+    @Test 
+    public void test03NoNeighbors() {
+      //origin node with no neighbors
+      Graph g = loadBasicGraph("data/Simple2.txt");
+        g.report();
+        ShortestPaths sp = new ShortestPaths();
+        Node origin = g.getNode("G");
+        sp.compute(g, origin);
+        assertEquals(sp.getPaths().size(), 1);
+        //the only path is the one to itself with length 0 with is always there.
+    }
+
+    @Test 
+    public void test04NoPath() {
+      //destination node that has no path to it
+      Graph g = loadBasicGraph("data/Simple2.txt");
+        g.report();
+        ShortestPaths sp = new ShortestPaths();
+        Node origin = g.getNode("A");
+        Node d = g.getNode("D");
+        Node f = g.getNode("F");
+        sp.compute(g, origin);
+        assertEquals(sp.getPaths().containsKey(d), false);
+        assertEquals(sp.getPaths().containsKey(f), true);
+        //node D has no other nodes pointing to it, but it points to 2 others
+        //node F has edges going to and from it, so it should have a path
     }
 
     /* Pro tip: unless you include @Test on the line above your method header,

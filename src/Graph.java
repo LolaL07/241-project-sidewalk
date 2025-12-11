@@ -56,4 +56,10 @@ public class Graph {
         System.out.println("Average degree " + ((double) numEdges) / ((double) numNodes));
     }
 
+    public void print() {
+        for(Map.Entry<String, Node> entry : getNodes().entrySet()) {
+            System.out.println("Node id: " + entry.getKey() + " distance: " + entry.getValue().dist);
+        }
+    }
+
 }
