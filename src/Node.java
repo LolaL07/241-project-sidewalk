@@ -62,13 +62,10 @@ public class Node implements Comparable<Node> {
       return id.hashCode();
     }
 
+
+    //comparable method for distances
     @Override
     public int compareTo(Node n) {
       return this.dist.compareTo(n.dist);
     }
 }
-
-// public class NodeComparator implements Comparator<Node> {
- 
-
-// }
