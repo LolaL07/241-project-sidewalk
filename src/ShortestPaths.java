@@ -25,7 +25,7 @@ public class ShortestPaths {
      * PathData record, storing total distance from the source, and the
      * back pointer to the previous node on the shortest path.
      * Precondition: origin is a node in the Graph.*/
-    public void compute(Node origin) {
+    public void compute(Graph g, Node origin) {
         
         // TODO 1: implement Dijkstra's algorithm to fill paths with
         // shortest-path data for each Node reachable from origin.
