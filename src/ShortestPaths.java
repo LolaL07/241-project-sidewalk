@@ -196,12 +196,26 @@ public class ShortestPaths {
       // If no path exists, print a message saying so.
 
         ShortestPaths sp = new ShortestPaths();
+        Node a = graph.getNode(SidewalkOrigCode);
+        sp.compute(graph, a);
 
-        if(SidewalkDestCode == null) {
+      if(SidewalkDestCode == null) {
         //print each node in paths and its distance
-
-        } else if(SidewalkDestCode != null) {
-
+        System.out.println("All node paths");
+        for(Map.Entry<Node, PathData> entry : sp.paths.entrySet()) {
+            System.out.println("Node: " + entry.getKey().getId() + " Path length: " + entry.getValue().distance);
         }
+
+      } else if(SidewalkDestCode != null) {
+        //print the nodes in the path from origin to destination
+        Node end = graph.getNode(SidewalkDestCode);
+        LinkedList<Node> path = sp.shortestPath(end);
+        System.out.println("The path is: ");
+        for(int i = 0; i < path.size(); i++) {
+            System.out.print(path.get(i).getId() + " ");
+        }
+        System.out.println("");
+        System.out.println("The path length is :" + sp.shortestPathLength(end));
+      }
     }
 }
