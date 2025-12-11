@@ -51,6 +51,22 @@ public class ShortestPathsTest {
         assertEquals(sp.shortestPathLength(b), 1.0, 1e-6);
     }
 
+    @Test
+    public void test02() {
+      //multi-edge path
+      Graph g = loadBasicGraph("data/Simple1.txt");
+        g.report();
+        ShortestPaths sp = new ShortestPaths();
+        Node a = g.getNode("A");
+        sp.compute(g, a);
+        Node d = g.getNode("D");
+        LinkedList<Node> adPath = sp.shortestPath(d);
+        assertEquals(adPath.size(), 3);
+        assertEquals(adPath.getFirst(), a);
+        assertEquals(adPath.getLast(),  d);
+        // assertEquals(sp.shortestPathLength(d), 1.0, 1e-6);
+
+    }
     /* Pro tip: unless you include @Test on the line above your method header,
      * JUnit will not run it! This gets me every time. */
 }
